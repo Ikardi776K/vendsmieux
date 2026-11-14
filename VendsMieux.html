@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VendsMieux – Vendez mieux. Vendez plus facilement.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#059669;--g2:#047857;--gl:#d1fae5;--bg:#fff;--bg2:#f4f6f5;--tx:#0a0a0a;--mu:#5b6560;--bd:#e3e8e5;--er:#b91c1c;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--g:#10b981;--g2:#34d399;--gl:#0b2e22;--bg:#0c0f0e;--bg2:#151a18;--tx:#f2f5f3;--mu:#9aa6a0;--bd:#26302c;--er:#f87171}}
+:root[data-theme="dark"]{--g:#10b981;--g2:#34d399;--gl:#0b2e22;--bg:#0c0f0e;--bg2:#151a18;--tx:#f2f5f3;--mu:#9aa6a0;--bd:#26302c;--er:#f87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 'DM Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','DM Sans',sans-serif;line-height:1.1;margin:0 0 .5em}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;letter-spacing:-.02em}
+h3{font-size:1.1rem;font-weight:600}
+a{color:inherit}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+header.top .w{display:flex;align-items:center;gap:12px;height:60px}
+.logo{font:800 1.3rem 'Bricolage Grotesque';text-decoration:none;margin-right:auto;letter-spacing:-.02em}
+.logo b{color:var(--g)}
+nav{display:flex;gap:4px}
+nav a{padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;color:var(--mu)}
+nav a[aria-current=page]{background:var(--gl);color:var(--g2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px 22px;font:700 1rem 'DM Sans';cursor:pointer;background:var(--g);color:#fff;text-decoration:none;min-height:46px}
+.btn:hover{background:var(--g2)}
+.btn.o{background:transparent;color:var(--tx);border:1.5px solid var(--bd)}
+.btn.o:hover{border-color:var(--g);background:var(--gl)}
+.btn.s{padding:8px 14px;min-height:38px;font-size:.9rem;border-radius:10px}
+.btn.d{color:var(--er)}
+:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.card{background:var(--bg);border:1px solid var(--bd);border-radius:20px;padding:22px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.hero{padding:64px 0 40px;display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center}
+.hero p.sub{font-size:1.15rem;color:var(--mu);max-width:34em}
+.tag{display:inline-block;background:var(--gl);color:var(--g2);font-weight:700;font-size:.85rem;padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.demo{background:var(--bg2);border-radius:28px;padding:20px;display:grid;gap:12px}
+.demo .ph{height:110px;border-radius:16px;background:linear-gradient(135deg,var(--gl),var(--bg));border:1.5px dashed var(--g);display:grid;place-items:center;font-size:2.4rem}
+.demo .ln{height:10px;border-radius:6px;background:var(--bd)}
+.mu{color:var(--mu)}
+.plat{display:flex;flex-wrap:wrap;gap:10px}
+.plat span{border:1px solid var(--bd);border-radius:999px;padding:8px 16px;font-weight:700}
+.price{font:800 2.2rem 'Bricolage Grotesque'}
+.price small{font:400 1rem 'DM Sans';color:var(--mu)}
+.card ul{padding-left:1.1em;margin:12px 0 0}
+.card.hl{border:2px solid var(--g)}
+details{border-bottom:1px solid var(--bd);padding:14px 0}
+summary{cursor:pointer;font-weight:700}
+footer{background:var(--bg2);padding:36px 0;color:var(--mu);font-size:.92rem}
+label{display:block;font-weight:700;font-size:.92rem;margin-bottom:6px}
+input,select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1.5px solid var(--bd);border-radius:12px;padding:12px;min-height:46px}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--gl);border-color:var(--g)}
+.f2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.fld{margin-bottom:14px}
+.hint{font-size:.82rem;color:var(--mu);margin-top:4px}
+.err{color:var(--er);font-weight:500;margin:8px 0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg label{margin:0;font-weight:500}
+.seg input{position:absolute;opacity:0;width:1px;min-height:0}
+.seg span{display:block;padding:10px 16px;border:1.5px solid var(--bd);border-radius:999px;cursor:pointer}
+.seg input:checked+span{background:var(--g);color:#fff;border-color:var(--g)}
+.seg input:focus-visible+span{outline:3px solid var(--g);outline-offset:2px}
+.up{border:2px dashed var(--bd);border-radius:16px;padding:18px;text-align:center;cursor:pointer;display:block;font-weight:500}
+.up:hover{border-color:var(--g)}
+.up img{max-width:100%;max-height:200px;border-radius:12px;display:block;margin:0 auto 8px}
+.banner{background:var(--gl);color:var(--g2);border-radius:14px;padding:12px 16px;font-size:.92rem;margin-bottom:18px}
+.res{display:grid;gap:16px;margin-top:8px}
+.res pre{white-space:pre-wrap;font:inherit;margin:10px 0 14px}
+.kw{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.kw span{background:var(--bg2);border-radius:999px;padding:4px 12px;font-size:.88rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.hi{display:flex;gap:14px;align-items:flex-start}
+.hi img{width:72px;height:72px;object-fit:cover;border-radius:12px;flex:none}
+.hi .t{flex:1;min-width:0}
+.spin{width:18px;height:18px;border:3px solid #fff5;border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#toast.on{opacity:1}
+dialog{border:1px solid var(--bd);border-radius:20px;background:var(--bg);color:var(--tx);width:min(560px,92vw);padding:22px}
+dialog::backdrop{background:#0008}
+.view{display:none}.view.on{display:block}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--g)}
+@media(max-width:600px){nav a{padding:8px 9px;font-size:.88rem}.logo{font-size:1.1rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="w">
+<a class="logo" href="#accueil">Vends<b>Mieux</b></a>
+<nav aria-label="Navigation principale">
+<a href="#creer" data-n="creer">Créer</a><a href="#historique" data-n="historique">Mes annonces</a><a href="#compte" data-n="compte" id="navAcc">Compte</a>
+</nav></div></header>
+
+<main>
+<!-- ACCUEIL -->
+<div class="view" id="v-accueil">
+<div class="w"><div class="hero">
+<div><span class="tag">Pour Vinted, Leboncoin et Facebook Marketplace</span>
+<h1>Vendez mieux. Vendez plus facilement.</h1>
+<p class="sub">Transformez vos photos en annonces attractives en quelques secondes grâce à l’intelligence artificielle.</p>
+<a class="btn" href="#creer">Créer mon annonce gratuitement</a>
+<p class="hint">3 annonces par mois, sans créer de compte.</p></div>
+<div class="demo" aria-label="Exemple d’annonce générée">
+<div class="ph" aria-hidden="true">👟</div>
+<div class="card"><strong>Baskets running Nike, taille 42, très bon état</strong>
+<div class="ln" style="margin:12px 0 8px;width:100%"></div><div class="ln" style="width:80%"></div>
+<div class="kw"><span>nike</span><span>running</span><span>homme</span></div></div></div>
+</div></div>
+
+<section style="background:var(--bg2)"><div class="w">
+<h2>Comment ça marche</h2>
+<div class="grid g3">
+<div class="card"><h3>1. Photographiez</h3><p class="mu">Ajoutez une photo et quelques infos : marque, état, taille, défauts.</p></div>
+<div class="card"><h3>2. Générez</h3><p class="mu">Titre, description, mots-clés et conseils photo sont prêts en un clic.</p></div>
+<div class="card"><h3>3. Copiez et publiez</h3><p class="mu">Collez le tout sur la plateforme de votre choix et retrouvez-le dans votre historique.</p></div>
+</div></div></section>
+
+<section><div class="w">
+<h2>Pourquoi VendsMieux</h2>
+<div class="grid g3">
+<div class="card"><h3>Honnête par conception</h3><p class="mu">L’annonce n’invente jamais une marque, un modèle, un état ou une caractéristique que vous n’avez pas indiqué.</p></div>
+<div class="card"><h3>Adapté à chaque plateforme</h3><p class="mu">Longueur du titre et ton ajustés pour Vinted, Leboncoin ou Facebook Marketplace.</p></div>
+<div class="card"><h3>Prix prudent</h3><p class="mu">Sans données de marché vérifiables, nous ne proposons pas de prix : nous vous aidons à le vérifier.</p></div>
+</div>
+<h3 style="margin-top:36px">Plateformes compatibles</h3>
+<div class="plat"><span>Vinted</span><span>Leboncoin</span><span>Facebook Marketplace</span></div>
+</div></section>
+
+<section style="background:var(--bg2)" id="tarifs"><div class="w">
+<h2>Tarifs</h2>
+<p class="mu">Le paiement n’est pas encore activé : seule la formule Gratuite est utilisable pour l’instant.</p>
+<div class="grid g3">
+<div class="card"><h3>Gratuit</h3><div class="price">0 €<small> /mois</small></div><ul><li>3 annonces par mois</li><li>Titres et descriptions</li><li>Copie des annonces</li></ul><p><a class="btn" href="#creer">Commencer</a></p></div>
+<div class="card hl"><h3>Premium</h3><div class="price">4,99 €<small> /mois</small></div><ul><li>50 annonces par mois</li><li>Historique complet</li><li>Conseils avancés</li><li>Génération améliorée</li></ul><p><button class="btn o" disabled>Bientôt disponible</button></p></div>
+<div class="card"><h3>Pro</h3><div class="price">9,99 €<small> /mois</small></div><ul><li>150 annonces par mois</li><li>Tout Premium</li><li>Outils pour vendeurs réguliers</li></ul><p><button class="btn o" disabled>Bientôt disponible</button></p></div>
+</div></div></section>
+
+<section><div class="w" style="max-width:760px">
+<h2>Questions fréquentes</h2>
+<details><summary>Faut-il un compte ?</summary><p class="mu">Non. La formule gratuite fonctionne sans compte. Un compte permet de retrouver vos annonces plus facilement.</p></details>
+<details><summary>L’IA est-elle connectée ?</summary><p class="mu">Tant qu’aucune clé API n’est configurée, l’application tourne en mode démonstration : le texte est construit à partir de vos informations, sans intelligence artificielle, et c’est clairement indiqué.</p></details>
+<details><summary>Le prix proposé est-il fiable ?</summary><p class="mu">Non, c’est une indication. Comparez toujours avec les annonces vendues sur la plateforme visée.</p></details>
+<details><summary>Mes données sont-elles envoyées quelque part ?</summary><p class="mu">En mode démonstration, tout reste dans votre navigateur.</p></details>
+</div></section>
+</div>
+
+<!-- CREER -->
+<div class="view" id="v-creer"><div class="w" style="max-width:760px;padding-top:32px;padding-bottom:48px">
+<h1 style="font-size:2rem">Créer mon annonce</h1>
+<div class="banner" id="modeBanner"></div>
+<div class="card" id="formCard">
+<form id="f" novalidate>
+<div class="fld"><label for="photo">Photo de l’objet</label>
+<label class="up" for="photo" id="upl"><span id="upT">Appuyer pour ajouter une photo</span></label>
+<input type="file" id="photo" accept="image/*" style="display:none"></div>
+<div class="f2">
+<div class="fld"><label for="nom">Nom ou type d’objet *</label><input id="nom" required placeholder="Ex. : baskets de running"></div>
+<div class="fld"><label for="marque">Marque</label><input id="marque" placeholder="Laisser vide si inconnue"></div>
+<div class="fld"><label for="cat">Catégorie *</label><select id="cat" required><option value="">Choisir…</option><option>Vêtements</option><option>Chaussures</option><option>Électronique</option><option>Maison et déco</option><option>Jeux et jouets</option><option>Livres et loisirs</option><option>Sport</option><option>Enfants et puériculture</option><option>Autre</option></select></div>
+<div class="fld"><label for="coul">Couleur</label><input id="coul" placeholder="Ex. : noir"></div>
+<div class="fld"><label for="taille">Taille ou dimensions</label><input id="taille" placeholder="Facultatif"></div>
+<div class="fld"><label for="prix">Prix souhaité (€)</label><input id="prix" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Facultatif"></div>
+</div>
+<div class="fld"><label id="etL">État *</label>
+<div class="seg" role="radiogroup" aria-labelledby="etL">
+<label><input type="radio" name="etat" value="Neuf"><span>Neuf</span></label>
+<label><input type="radio" name="etat" value="Très bon état"><span>Très bon état</span></label>
+<label><input type="radio" name="etat" value="Bon état"><span>Bon état</span></label>
+<label><input type="radio" name="etat" value="État correct"><span>État correct</span></label></div></div>
+<div class="fld"><label for="def">Défauts éventuels</label><textarea id="def" rows="2" placeholder="Taches, usure, pièce manquante… Soyez précis : cela rassure les acheteurs."></textarea></div>
+<div class="fld"><label id="plL">Plateforme *</label>
+<div class="seg" role="radiogroup" aria-labelledby="plL">
+<label><input type="radio" name="pf" value="Vinted" checked><span>Vinted</span></label>
+<label><input type="radio" name="pf" value="Leboncoin"><span>Leboncoin</span></label>
+<label><input type="radio" name="pf" value="Facebook Marketplace"><span>Facebook Marketplace</span></label></div></div>
+<div class="err" id="ferr" role="alert"></div>
+<button class="btn" id="go" type="submit" style="width:100%">Générer mon annonce</button>
+<div class="hint" id="quota"></div>
+</form></div>
+<div id="out" style="display:none"></div>
+</div></div>
+
+<!-- HISTORIQUE -->
+<div class="view" id="v-historique"><div class="w" style="max-width:760px;padding-top:32px;padding-bottom:48px">
+<h1 style="font-size:2rem">Mes annonces</h1><div id="hist"></div></div></div>
+
+<!-- COMPTE -->
+<div class="view" id="v-compte"><div class="w" style="max-width:520px;padding-top:32px;padding-bottom:48px">
+<h1 style="font-size:2rem">Compte</h1><div id="acc"></div></div></div>
+</main>
+
+<footer><div class="w">
+<strong style="color:var(--tx)">VendsMieux</strong> · Formule gratuite · <a href="#accueil">Accueil</a> · <a href="#tarifs" id="lt">Tarifs</a><br>
+VendsMieux n’est affilié ni à Vinted, ni à Leboncoin, ni à Meta. Les prix indiqués sont des estimations, jamais une garantie de vente.
+</div></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="dlg"><h3>Modifier l’annonce</h3>
+<div class="fld"><label for="eT">Titre</label><input id="eT"></div>
+<div class="fld"><label for="eD">Description</label><textarea id="eD" rows="9"></textarea></div>
+<div class="row" style="justify-content:flex-end"><button class="btn o s" id="eC">Annuler</button><button class="btn s" id="eS">Enregistrer</button></div></dialog>
+
+<script>
+/* ========= Configuration : brancher une vraie IA =========
+   Renseignez l’URL d’une fonction serveur (Supabase Edge Function / route Next.js)
+   qui appelle l’API IA avec la clé gardée côté serveur. Elle reçoit les champs du
+   formulaire en JSON et doit renvoyer {title, description, features[], keywords[], price, photoTips[]}. */
+const AI_ENDPOINT = null;
+const PLANS = {free:3};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){ toast('Stockage du navigateur indisponible'); } }
+};
+let mem = {photo:null, last:null};
+const user = () => store.get('vm_session', null);
+const hKey = () => 'vm_hist_' + (user() || 'guest');
+const hist = () => store.get(hKey(), []);
+const monthKey = () => new Date().toISOString().slice(0,7);
+const used = () => { const u = store.get('vm_usage_' + (user() || 'guest'), {}); return u.m === monthKey() ? u.n : 0; };
+const bump = () => store.set('vm_usage_' + (user() || 'guest'), {m: monthKey(), n: used() + 1});
+
+function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2200); }
+async function copy(txt, msg){
+  try { await navigator.clipboard.writeText(txt); toast(msg); }
+  catch(e){ const a = document.createElement('textarea'); a.value = txt; document.body.appendChild(a); a.select();
+    try { document.execCommand('copy'); toast(msg); } catch(_) { toast('Copie impossible : sélectionnez le texte à la main'); } a.remove(); }
+}
+
+/* ========= Routage ========= */
+function route(){
+  const h = (location.hash || '#accueil').slice(1);
+  const id = ['accueil','creer','historique','compte'].includes(h) ? h : 'accueil';
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('on', v.id === 'v-' + id));
+  document.querySelectorAll('nav a').forEach(a => a.dataset.n === id ? a.setAttribute('aria-current','page') : a.removeAttribute('aria-current'));
+  if (id === 'creer') renderForm();
+  if (id === 'historique') renderHist();
+  if (id === 'compte') renderAcc();
+  $('#navAcc').textContent = user() ? 'Mon compte' : 'Connexion';
+  if (h !== 'tarifs') window.scrollTo(0,0);
+}
+addEventListener('hashchange', route);
+$('#lt').addEventListener('click', e => { e.preventDefault(); location.hash = '#accueil'; setTimeout(() => document.getElementById('tarifs').scrollIntoView(), 30); });
+
+/* ========= Formulaire ========= */
+function renderForm(){
+  $('#modeBanner').textContent = AI_ENDPOINT ? 'IA connectée.' : 'Mode démonstration : le texte est assemblé à partir de vos informations, sans intelligence artificielle. Aucune IA n’est connectée.';
+  const left = Math.max(0, PLANS.free - used());
+  $('#quota').textContent = left + ' annonce' + (left > 1 ? 's' : '') + ' gratuite' + (left > 1 ? 's' : '') + ' restante' + (left > 1 ? 's' : '') + ' ce mois-ci.';
+}
+$('#photo').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  if (!f.type.startsWith('image/')) { $('#ferr').textContent = 'Ce fichier n’est pas une image.'; return; }
+  const r = new FileReader();
+  r.onload = () => { const im = new Image(); im.onload = () => {
+    const s = Math.min(1, 240 / Math.max(im.width, im.height)), c = document.createElement('canvas');
+    c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+    mem.photo = c.toDataURL('image/jpeg', .7);
+    $('#upl').innerHTML = '<img alt="Aperçu de la photo" src="' + mem.photo + '"><span>Changer la photo</span>'; };
+    im.onerror = () => { $('#ferr').textContent = 'Image illisible. Essayez un fichier JPG ou PNG.'; };
+    im.src = r.result; };
+  r.readAsDataURL(f);
+});
+
+function formData(){
+  const g = id => $('#' + id).value.trim(), r = n => (document.querySelector('input[name=' + n + ']:checked') || {}).value || '';
+  return {nom:g('nom'), marque:g('marque'), cat:g('cat'), etat:r('etat'), taille:g('taille'), coul:g('coul'), def:g('def'), prix:g('prix'), pf:r('pf')};
+}
+
+/* Générateur démo : n’utilise QUE les champs renseignés. */
+function demoGenerate(d){
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const max = {Vinted:60, Leboncoin:70, 'Facebook Marketplace':80}[d.pf] || 60;
+  let parts = [cap(d.nom)]; if (d.marque) parts.push(d.marque);
+  let extra = [d.coul, d.taille && ('taille ' + d.taille), d.etat.toLowerCase()].filter(Boolean);
+  let title = parts.join(' ') + (extra.length ? ' – ' + extra.join(', ') : '');
+  while (title.length > max && extra.length > 1) { extra.splice(extra.length - 2, 1); title = parts.join(' ') + ' – ' + extra.join(', '); }
+  if (title.length > max) title = title.slice(0, max - 1).trimEnd() + '…';
+  const features = [['Type', d.nom], ['Marque', d.marque], ['Catégorie', d.cat], ['État', d.etat], ['Couleur', d.coul], ['Taille / dimensions', d.taille]].filter(f => f[1]);
+  const L = [];
+  L.push('Je vends ' + (d.marque ? d.nom.toLowerCase() + ' ' + d.marque : d.nom.toLowerCase()) + (d.coul ? ' de couleur ' + d.coul.toLowerCase() : '') + '.');
+  L.push('État : ' + d.etat.toLowerCase() + '.' + (d.taille ? ' Taille / dimensions : ' + d.taille + '.' : ''));
+  L.push(d.def ? 'À signaler : ' + d.def.replace(/\.$/, '') + '. Les détails sont visibles sur les photos.' : 'Aucun défaut particulier à signaler à ma connaissance. N’hésitez pas à me poser vos questions.');
+  L.push(d.pf === 'Vinted' ? 'Envoi soigné possible. Lot possible avec mes autres articles.' : d.pf === 'Leboncoin' ? 'Remise en main propre possible ou envoi selon accord.' : 'Remise en main propre à convenir.');
+  const stop = new Set(['de','du','la','le','les','des','en','et','un','une','pour']);
+  const kw = [...new Set([d.nom, d.marque, d.cat, d.coul, d.etat, d.taille].filter(Boolean).flatMap(x => x.toLowerCase().split(/[\s,\/]+/)).filter(w => w.length > 1 && !stop.has(w)))].slice(0, 10);
+  const price = d.prix
+    ? {txt: Number(d.prix).toLocaleString('fr-FR') + ' €', note:'C’est le prix que vous avez indiqué. Aucune donnée de marché n’est connectée : comparez avec des articles similaires déjà vendus sur ' + d.pf + '.'}
+    : {txt: null, note:'Aucune donnée de marché fiable disponible : pas d’estimation. Regardez les articles similaires vendus sur ' + d.pf + ' pour fixer votre prix.'};
+  const tips = ['Photographiez en lumière naturelle, sur fond neutre.', 'Montrez l’objet entier, puis les détails (étiquette, finitions).', 'Prenez chaque défaut en photo de près : cela évite les litiges.', 'Ajoutez une photo avec un repère de taille (règle, main).'];
+  if (!d.marque) tips.push('Si une marque figure sur l’objet, photographiez l’étiquette et ajoutez-la.');
+  return {title, description: L.join('\n\n'), features, keywords: kw, price, tips};
+}
+async function generate(d){
+  if (!AI_ENDPOINT) { await new Promise(r => setTimeout(r, 700)); return demoGenerate(d); }
+  const res = await fetch(AI_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({...d, photo: mem.photo})});
+  if (!res.ok) throw new Error('Le service IA a répondu avec une erreur (' + res.status + ').');
+  const j = await res.json();
+  return {title:j.title, description:j.description, features:j.features || [], keywords:j.keywords || [], price:{txt:j.price || null, note:'Estimation indicative, à vérifier.'}, tips:j.photoTips || []};
+}
+
+$('#f').addEventListener('submit', async e => {
+  e.preventDefault();
+  const d = formData(), err = $('#ferr'); err.textContent = '';
+  if (!d.nom) { err.textContent = 'Indiquez le nom ou le type de l’objet.'; $('#nom').focus(); return; }
+  if (!d.cat) { err.textContent = 'Choisissez une catégorie.'; $('#cat').focus(); return; }
+  if (!d.etat) { err.textContent = 'Choisissez l’état de l’objet.'; return; }
+  if (used() >= PLANS.free) { err.textContent = 'Vous avez utilisé vos 3 annonces gratuites ce mois-ci. Les formules Premium et Pro arrivent bientôt.'; return; }
+  const b = $('#go'); b.disabled = true; b.innerHTML = '<span class="spin"></span> Génération…';
+  try { const r = await generate(d); bump(); mem.last = {...r, input:d, photo:mem.photo, demo:!AI_ENDPOINT, saved:false}; showResult(); }
+  catch(x){ err.textContent = 'La génération a échoué : ' + x.message + ' Réessayez dans un instant.'; }
+  b.disabled = false; b.textContent = 'Générer mon annonce'; renderForm();
+});
+
+function fullText(a){ return a.title + '\n\n' + a.description + '\n\nCaractéristiques :\n' + a.features.map(f => '- ' + f[0] + ' : ' + f[1]).join('\n') + (a.keywords.length ? '\n\nMots-clés : ' + a.keywords.join(', ') : ''); }
+function showResult(){
+  const a = mem.last, o = $('#out');
+  $('#formCard').style.display = 'none'; o.style.display = 'block';
+  o.innerHTML = (a.demo ? '<div class="banner">Résultat de démonstration : assemblé à partir de vos informations, sans IA.</div>' : '') +
+  '<div class="res">' +
+  '<div class="card"><h3>Titre</h3><pre id="rT">' + esc(a.title) + '</pre><button class="btn o s" id="cT">Copier le titre</button></div>' +
+  '<div class="card"><h3>Description</h3><pre id="rD">' + esc(a.description) + '</pre><button class="btn o s" id="cD">Copier la description</button></div>' +
+  '<div class="card"><h3>Caractéristiques et mots-clés</h3><ul>' + a.features.map(f => '<li><strong>' + esc(f[0]) + ' :</strong> ' + esc(f[1]) + '</li>').join('') + '</ul><div class="kw">' + a.keywords.map(k => '<span>' + esc(k) + '</span>').join('') + '</div></div>' +
+  '<div class="card"><h3>Prix indicatif</h3>' + (a.price.txt ? '<div class="price">' + esc(a.price.txt) + '</div>' : '') + '<p class="mu">' + esc(a.price.note) + '</p></div>' +
+  '<div class="card"><h3>Conseils pour de meilleures photos</h3><ul>' + a.tips.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>' +
+  '<div class="row"><button class="btn" id="cA">Copier toute l’annonce</button><button class="btn o" id="sv">Enregistrer</button><button class="btn o" id="nw">Nouvelle annonce</button></div></div>';
+  $('#cT').onclick = () => copy(a.title, 'Titre copié');
+  $('#cD').onclick = () => copy(a.description, 'Description copiée');
+  $('#cA').onclick = () => copy(fullText(a), 'Annonce copiée');
+  $('#sv').onclick = () => { if (a.saved) return toast('Déjà enregistrée'); const h = hist(); h.unshift({id:Date.now(), date:new Date().toISOString(), title:a.title, description:a.description, features:a.features, keywords:a.keywords, photo:a.photo, pf:a.input.pf}); store.set(hKey(), h); a.saved = true; toast('Annonce enregistrée'); };
+  $('#nw').onclick = () => { o.style.display = 'none'; o.innerHTML = ''; $('#formCard').style.display = 'block'; $('#f').reset(); mem.photo = null; $('#upl').innerHTML = '<span>Appuyer pour ajouter une photo</span>'; window.scrollTo(0,0); };
+  o.scrollIntoView();
+}
+
+/* ========= Historique ========= */
+let editId = null;
+function renderHist(){
+  const h = hist(), el = $('#hist');
+  if (!user()) el.innerHTML = '<div class="banner">Sans compte, vos annonces sont gardées sur cet appareil uniquement. <a href="#compte">Créer un compte</a></div>';
+  else el.innerHTML = '';
+  if (!h.length) { el.innerHTML += '<div class="card"><p>Aucune annonce enregistrée pour l’instant.</p><a class="btn" href="#creer">Créer une annonce</a></div>'; return; }
+  el.innerHTML += '<div class="grid">' + h.map(a => '<div class="card hi">' + (a.photo ? '<img alt="" src="' + a.photo + '">' : '') +
+    '<div class="t"><h3>' + esc(a.title) + '</h3><p class="mu" style="margin:0 0 10px">' + esc(a.pf) + ' · ' + new Date(a.date).toLocaleDateString('fr-FR') + '</p>' +
+    '<div class="row"><button class="btn o s" data-a="copy" data-i="' + a.id + '">Copier</button><button class="btn o s" data-a="edit" data-i="' + a.id + '">Modifier</button><button class="btn o s d" data-a="del" data-i="' + a.id + '">Supprimer</button></div></div></div>').join('') + '</div>';
+}
+$('#hist').addEventListener('click', e => {
+  const b = e.target.closest('button[data-a]'); if (!b) return;
+  const id = Number(b.dataset.i), h = hist(), a = h.find(x => x.id === id); if (!a) return;
+  if (b.dataset.a === 'copy') copy(fullText(a), 'Annonce copiée');
+  if (b.dataset.a === 'del') { if (confirm('Supprimer cette annonce ?')) { store.set(hKey(), h.filter(x => x.id !== id)); renderHist(); toast('Annonce supprimée'); } }
+  if (b.dataset.a === 'edit') { editId = id; $('#eT').value = a.title; $('#eD').value = a.description; $('#dlg').showModal(); }
+});
+$('#eC').onclick = () => $('#dlg').close();
+$('#eS').onclick = () => { const t = $('#eT').value.trim(); if (!t) return toast('Le titre ne peut pas être vide');
+  store.set(hKey(), hist().map(a => a.id === editId ? {...a, title:t, description:$('#eD').value} : a)); $('#dlg').close(); renderHist(); toast('Modifications enregistrées'); };
+
+/* ========= Comptes (démo locale) ========= */
+async function hash(s){ const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join(''); }
+function renderAcc(){
+  const u = user(), el = $('#acc');
+  if (u) { const left = Math.max(0, PLANS.free - used());
+    el.innerHTML = '<div class="card"><p>Connecté : <strong>' + esc(u) + '</strong></p><p>Formule : <strong>Gratuit</strong></p><p>' + left + ' annonce(s) restante(s) ce mois-ci</p><div class="bar"><i style="width:' + (100 - left / PLANS.free * 100) + '%"></i></div><p class="hint">' + hist().length + ' annonce(s) enregistrée(s).</p><button class="btn o" id="lo">Se déconnecter</button></div>';
+    $('#lo').onclick = () => { localStorage.removeItem('vm_session'); toast('Déconnecté'); location.hash = '#accueil'; route(); };
+    return; }
+  el.innerHTML = '<div class="banner">Compte de démonstration : stocké dans ce navigateur uniquement. Brancher Supabase Auth le rendra réel (voir les explications).</div><div class="card"><div class="seg" style="margin-bottom:16px"><label><input type="radio" name="m" value="in" checked><span>Connexion</span></label><label><input type="radio" name="m" value="up"><span>Inscription</span></label></div>' +
+    '<div class="fld"><label for="aE">E-mail</label><input id="aE" type="email" autocomplete="email"></div><div class="fld"><label for="aP">Mot de passe (8 caractères minimum)</label><input id="aP" type="password" autocomplete="current-password"></div><div class="err" id="aErr" role="alert"></div><button class="btn" id="aGo" style="width:100%">Se connecter</button></div>';
+  el.querySelectorAll('input[name=m]').forEach(r => r.onchange = () => $('#aGo').textContent = r.value === 'in' ? 'Se connecter' : 'Créer mon compte');
+  $('#aGo').onclick = async () => {
+    const mail = $('#aE').value.trim().toLowerCase(), pw = $('#aP').value, up = document.querySelector('input[name=m]:checked').value === 'up', er = $('#aErr');
+    if (!/^\S+@\S+\.\S+$/.test(mail)) return er.textContent = 'Saisissez une adresse e-mail valide.';
+    if (pw.length < 8) return er.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+    const users = store.get('vm_users', {}), hp = await hash(mail + pw);
+    if (up) { if (users[mail]) return er.textContent = 'Un compte existe déjà avec cet e-mail. Connectez-vous.';
+      users[mail] = hp; store.set('vm_users', users);
+      const g = store.get('vm_hist_guest', []); if (g.length) { store.set('vm_hist_' + mail, g); localStorage.removeItem('vm_hist_guest'); } }
+    else if (users[mail] !== hp) return er.textContent = 'E-mail ou mot de passe incorrect.';
+    store.set('vm_session', mail); toast(up ? 'Compte créé' : 'Connecté'); location.hash = '#historique'; route();
+  };
+}
+route();
+</script>
+</body>
+</html>
