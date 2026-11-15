@@ -211,7 +211,7 @@ VendsMieux n’est affilié ni à Vinted, ni à Leboncoin, ni à Meta. Les prix 
    Renseignez l’URL d’une fonction serveur (Supabase Edge Function / route Next.js)
    qui appelle l’API IA avec la clé gardée côté serveur. Elle reçoit les champs du
    formulaire en JSON et doit renvoyer {title, description, features[], keywords[], price, photoTips[]}. */
-const AI_ENDPOINT = null;
+const AI_ENDPOINT = '/api/generate';
 const PLANS = {free:3};
 
 const $ = s => document.querySelector(s);
