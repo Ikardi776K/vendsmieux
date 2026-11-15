@@ -158,7 +158,13 @@ dialog::backdrop{background:#0008}
 <form id="f" novalidate>
 <div class="fld"><label for="photo">Photo de l’objet</label>
 <label class="up" for="photo" id="upl"><span id="upT">Appuyer pour ajouter une photo</span></label>
-<input type="file" id="photo" accept="image/*" style="display:none"></div>
+<input type="file" id="photo" accept="image/*" style="display:none">
+<div id="enh" style="display:none;margin-top:10px">
+<div class="row">
+<button type="button" class="btn s" id="enhB">Améliorer la photo</button>
+<button type="button" class="btn o s" id="dlB">Télécharger</button>
+<label style="margin:0;font-weight:500"><input type="checkbox" id="sq" style="width:auto;min-height:0"> Recadrer en carré</label></div>
+<div class="hint">Seuls la luminosité et le contraste sont ajustés. Les défauts et les couleurs ne sont jamais retouchés, et vous pouvez revenir à l’original.</div></div></div>
 <div class="f2">
 <div class="fld"><label for="nom">Nom ou type d’objet *</label><input id="nom" required placeholder="Ex. : baskets de running"></div>
 <div class="fld"><label for="marque">Marque</label><input id="marque" placeholder="Laisser vide si inconnue"></div>
@@ -261,14 +267,47 @@ $('#photo').addEventListener('change', e => {
   if (!f.type.startsWith('image/')) { $('#ferr').textContent = 'Ce fichier n’est pas une image.'; return; }
   const r = new FileReader();
   r.onload = () => { const im = new Image(); im.onload = () => {
-    const s = Math.min(1, 240 / Math.max(im.width, im.height)), c = document.createElement('canvas');
-    c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
-    mem.photo = c.toDataURL('image/jpeg', .7);
-    $('#upl').innerHTML = '<img alt="Aperçu de la photo" src="' + mem.photo + '"><span>Changer la photo</span>'; };
+    mem.orig = toCanvas(im, 1600); mem.enh = false; $('#sq').checked = false;
+    $('#enhB').textContent = 'Améliorer la photo'; $('#enh').style.display = 'block'; render(); };
     im.onerror = () => { $('#ferr').textContent = 'Image illisible. Essayez un fichier JPG ou PNG.'; };
     im.src = r.result; };
   r.readAsDataURL(f);
 });
+function toCanvas(src, max){
+  const s = Math.min(1, max / Math.max(src.width, src.height)), c = document.createElement('canvas');
+  c.width = Math.max(1, Math.round(src.width * s)); c.height = Math.max(1, Math.round(src.height * s));
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height); return c;
+}
+function squareCrop(c){
+  const s = Math.min(c.width, c.height), o = document.createElement('canvas'); o.width = o.height = s;
+  o.getContext('2d').drawImage(c, (c.width - s) / 2, (c.height - s) / 2, s, s, 0, 0, s, s); return o;
+}
+/* Ajuste luminosité et contraste uniquement (même courbe sur R, V, B) : aucune retouche locale. */
+function autoLevels(c){
+  const o = document.createElement('canvas'); o.width = c.width; o.height = c.height;
+  const x = o.getContext('2d'); x.drawImage(c, 0, 0);
+  const id = x.getImageData(0, 0, o.width, o.height), p = id.data, n = p.length / 4, h = new Uint32Array(256); let sum = 0;
+  for (let i = 0; i < p.length; i += 4) { const l = Math.round(.299 * p[i] + .587 * p[i+1] + .114 * p[i+2]); h[l]++; sum += l; }
+  let a = 0, lo = 0, hi = 255;
+  for (let i = 0; i < 256; i++) { a += h[i]; if (a >= n * .01) { lo = i; break; } }
+  a = 0; for (let i = 255; i >= 0; i--) { a += h[i]; if (a >= n * .01) { hi = i; break; } }
+  if (hi - lo < 40) { lo = 0; hi = 255; }
+  const m = Math.min(.95, Math.max(.05, (sum / n - lo) / (hi - lo)));
+  const e = m < .45 ? Math.max(.6, Math.log(.45) / Math.log(m)) : 1, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(Math.min(1, Math.max(0, (i - lo) / (hi - lo))), e);
+  for (let i = 0; i < p.length; i += 4) { p[i] = lut[p[i]]; p[i+1] = lut[p[i+1]]; p[i+2] = lut[p[i+2]]; }
+  x.putImageData(id, 0, 0); return o;
+}
+function render(){
+  if (!mem.orig) return;
+  let c = $('#sq').checked ? squareCrop(mem.orig) : mem.orig;
+  if (mem.enh) c = autoLevels(c);
+  mem.cur = c; mem.photo = toCanvas(c, 240).toDataURL('image/jpeg', .7);
+  $('#upl').innerHTML = '<img alt="Aperçu de la photo" src="' + c.toDataURL('image/jpeg', .85) + '"><span>Changer la photo</span>';
+}
+$('#enhB').onclick = () => { mem.enh = !mem.enh; $('#enhB').textContent = mem.enh ? 'Voir l’original' : 'Améliorer la photo'; render(); };
+$('#sq').onchange = render;
+$('#dlB').onclick = () => { if (!mem.cur) return; mem.cur.toBlob(b => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'photo-vendsmieux.jpg'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); }, 'image/jpeg', .9); };
 
 function formData(){
   const g = id => $('#' + id).value.trim(), r = n => (document.querySelector('input[name=' + n + ']:checked') || {}).value || '';
@@ -336,7 +375,7 @@ function showResult(){
   $('#cD').onclick = () => copy(a.description, 'Description copiée');
   $('#cA').onclick = () => copy(fullText(a), 'Annonce copiée');
   $('#sv').onclick = () => { if (a.saved) return toast('Déjà enregistrée'); const h = hist(); h.unshift({id:Date.now(), date:new Date().toISOString(), title:a.title, description:a.description, features:a.features, keywords:a.keywords, photo:a.photo, pf:a.input.pf}); store.set(hKey(), h); a.saved = true; toast('Annonce enregistrée'); };
-  $('#nw').onclick = () => { o.style.display = 'none'; o.innerHTML = ''; $('#formCard').style.display = 'block'; $('#f').reset(); mem.photo = null; $('#upl').innerHTML = '<span>Appuyer pour ajouter une photo</span>'; window.scrollTo(0,0); };
+  $('#nw').onclick = () => { o.style.display = 'none'; o.innerHTML = ''; $('#formCard').style.display = 'block'; $('#f').reset(); mem.photo = null; mem.orig = null; mem.cur = null; $('#enh').style.display = 'none'; $('#upl').innerHTML = '<span>Appuyer pour ajouter une photo</span>'; window.scrollTo(0,0); };
   o.scrollIntoView();
 }
 
